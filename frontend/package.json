@@ -11,15 +11,16 @@
     "commit": "cz"
   },
   "dependencies": {
+    "autoprefixer": "latest",
+    "axios": "^1.5.1",
+    "eslint": "latest",
+    "eslint-config-next": "latest",
+    "next": "latest",
+    "postcss": "latest",
     "react": "latest",
     "react-dom": "latest",
-    "next": "latest",
     "tailwindcss": "latest",
-    "tailwindcss-debug-screens": "^2.2.1",
-    "autoprefixer": "latest",
-    "postcss": "latest",
-    "eslint": "latest",
-    "eslint-config-next": "latest"
+    "tailwindcss-debug-screens": "^2.2.1"
   },
   "devDependencies": {
     "classnames": "^2.3.2",
