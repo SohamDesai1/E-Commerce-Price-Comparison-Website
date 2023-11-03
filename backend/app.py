@@ -1,5 +1,5 @@
-from helper import scrap_amazon, getAmznImage
-from flask import Flask, request
+from helper import scrap_amazon, scrap_flipkart
+from flask import Flask, request,jsonify
 from flask_cors import CORS
 
 
@@ -12,20 +12,18 @@ def main():
     return {"message": 'Hello World'}
 
 
-@app.route('/api/input', methods=['POST'])
-def track():
-    url = request.json.get('inputData', "")
-    for i in range(1):
-        if "amazon" or "amzn" in url:
-            product_price = scrap_amazon(url)
-            # product_img = getAmznImage(url)
-            return  product_price
+@app.route('/api/input/compare', methods=['POST'])
+def compare():
+    name = request.json.get('inputData', "")
+    site = request.args.get('site', '')
+    if site == 'amazon':
+        data = scrap_amazon(name)
+    elif site == 'flipkart':
+        data = scrap_flipkart(name)
+    else:
+        return jsonify({"error": "Invalid site specified"})
 
-        # elif "flipkart" in url:
-        #     product_price = scrapeProductInfo_flkt(url)
-        #     if product_price != -1:
-        #         break
-
+    return data
 
 if __name__ == "__main__":
     app.run(debug=True)
