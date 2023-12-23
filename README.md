@@ -34,24 +34,51 @@ This project is a powerful e-commerce price comparison website that allows users
 
 ### Setup:
 
-#### Backend:
-- Install Flask and its dependencies.
-- Configure the database (e.g. MySQL, MongoDB).
-- Set up the API routes and logic.
+To set up the project, you will need the following:
 
-#### Frontend:
-- Install Next.js and its dependencies.
-- Create the UI components and pages.
-- Integrate the backend API for data fetching and displaying.
+- Python 3.8 or higher
+- Node.js 12 or higher
+- npm
+- virtualenv
+Once you have the required software installed, follow these steps:
+
+Clone the repository:
+git clone https://github.com/your-username/E-Commerce-Price-Comparison-Website.git
+
+Create a virtual environment:
+```bash
+python -m venv venv
+```
+Activate the virtual environment:
+```bash
+source venv/bin/activate
+```
+Install the required Python packages:
+```bash
+pip install -r requirements.txt
+```
+Install the required Node.js packages:
+```bash
+cd frontend
+npm install
+```
+Start the Flask server:
+```bash
+python app.py
+```
+Start the Next.js development server:
+```bash
+cd frontend
+npm run dev
+```
 
 ### Usage:
 
-1. Clone the repository.
-2. Install the required dependencies.
-3. Set up the database and configure the connection.
-4. Run the backend server.
-5. Build the frontend application and serve it.
-6. Visit the website to compare prices and find the best deals.
+Once the Flask server and the Next.js development server are running, open your browser and navigate to http://localhost:3000. You should see the homepage of the price comparison website.
+
+To use the website, simply enter the name of the product you want to compare in the search bar and click on the "Search" button. The results page will display a list of products from different e-commerce websites along with their prices. You can click on any product to view more detailed information.
+
+To create an account, click on the "Sign Up" link in the top right corner of the page. Once you have created an account, you can save your favorite products and compare prices over time.
 
 
 ### Contributing:
