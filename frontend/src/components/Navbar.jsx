@@ -13,7 +13,7 @@ const Navbar = () => {
                         <Link href={'/flipkart'}><h1 className="mr-5 text-white hover:text-gray-300">Flipkart </h1></Link>
                         <Link href={'/comparison'}><h1 className="mr-5 text-white hover:text-gray-300">Compare </h1></Link>                    </nav>
                     <button className="inline-flex items-center px-3 py-1 mt-4 text-base text-black bg-blue-400 border-0 rounded focus:outline-none hover:bg-gray-200 md:mt-0">
-                        Log in
+                        <Link href={"/login"}>Log in </Link>
                     </button>
                 </div>
             </header>
