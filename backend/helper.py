@@ -14,27 +14,27 @@ def scrap_amazon(name):
         'DNT' : '1', # Do Not Track Request Header 
         'Connection' : 'close'
         }
-        URL = "https://www.amazon.in/s?k=" + \
+        url_a = "https://www.amazon.in/s?k=" + \
             str(name) + "&ref=nb_sb_noss_2"
-        recieve = requests.get(URL, headers=headers)
+        recieve_a = requests.get(url_a, headers=headers)
         # print(recieve.content)
-        soup = BeautifulSoup(recieve.content, 'html.parser')
-        title = soup.find(
+        soup = BeautifulSoup(recieve_a.content, 'html.parser')
+        title_a = soup.find(
             "span", {"class": "a-size-medium a-color-base a-text-normal"}).text
-        parent_price = soup.find(
+        parent_price_a = soup.find(
             'div', class_='a-row a-size-base a-color-base')
-        price = parent_price.find('span', class_='a-price-whole').text
-        print("Amazon:", price)
-        image = soup.find('img', attrs={'class': 's-image'})
-        imagelink = image['src']
-        print(imagelink)
-        rating_text = soup.find('span', attrs={
+        price_a = parent_price_a.find('span', class_='a-price-whole').text
+        print("Amazon:", price_a)
+        image_a = soup.find('img', attrs={'class': 's-image'})
+        imagelink_a = image_a['src']
+        print(imagelink_a)
+        rating_text_a = soup.find('span', attrs={
                                 'class': 'a-icon-alt'}).text
-        parts = rating_text.split(" out of ")
-        rating = parts[0]
-        reviews = soup.find(
+        parts_a = rating_text_a.split(" out of ")
+        rating_a = parts_a[0]
+        reviews_a = soup.find(
             "span", {"class": "a-size-base s-underline-text"}).text
-        return jsonify({"name": title, "price": price, "image": imagelink, "rating": rating, "reviews": reviews})
+        return jsonify({"name": title_a, "price": price_a, "image": imagelink_a, "rating": rating_a, "reviews": reviews_a})
     except:
         return jsonify({"error": "Not Found"})
 
