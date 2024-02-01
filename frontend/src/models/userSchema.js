@@ -14,7 +14,7 @@ const User = new mongoose.Schema({
         type: String,
         required: [true, "Password is required"]
     },
-    favorites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
+    favourites: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Product' }],
     isVerified: {
         type: Boolean,
         default: false
