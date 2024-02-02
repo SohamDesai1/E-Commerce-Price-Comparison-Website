@@ -1,5 +1,17 @@
+"use client"
 import Link from 'next/link'
+import { useRouter } from 'next/navigation';
+import { useState,useEffect } from 'react';
 const Navbar = () => {
+    const [token, setToken] = useState(null);
+
+    useEffect(() => {
+        if (typeof window !== "undefined") {
+            const storedToken = localStorage.getItem("token");
+            setToken(storedToken);
+        }
+    }, []);
+    const router = useRouter();
     return (
         <>
             <header className="text-gray-600 bg-black body-font">
@@ -12,9 +24,26 @@ const Navbar = () => {
                         <Link href={'/comparison'}><h1 className="mr-5 text-white hover:text-gray-300">Compare </h1></Link>
                         <Link href={'/favourites'}><h1 className="mr-5 text-white hover:text-gray-300">Favourites </h1></Link>
                     </nav>
-                    <button className="inline-flex items-center px-3 py-1 mt-4 text-base text-black bg-blue-400 border-0 rounded focus:outline-none hover:bg-gray-200 md:mt-0">
-                        <Link href={"/login"}>Log in </Link>
-                    </button>
+                    {token ? (
+                        <button
+                            className="inline-flex items-center px-3 py-1 mt-4 text-base text-black bg-blue-400 border-0 rounded focus:outline-none hover:bg-gray-200 md:mt-0"
+                            onClick={() => {
+                                // Remove the token from localStorage or perform logout logic
+                                localStorage.removeItem("token");
+                                localStorage.removeItem("id");
+                                // Redirect to the login page or perform other actions
+                                router.push("/login");
+                            }}
+                        >
+                            Log out
+                        </button>
+                    ) : (
+                        <Link href={"/login"}>
+                            <button className="inline-flex items-center px-3 py-1 mt-4 text-base text-black bg-blue-400 border-0 rounded focus:outline-none hover:bg-gray-200 md:mt-0">
+                                Log in
+                            </button>
+                        </Link>
+                    )}
                 </div>
             </header>
 
