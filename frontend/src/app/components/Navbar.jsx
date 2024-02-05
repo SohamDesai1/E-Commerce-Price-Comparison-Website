@@ -1,15 +1,18 @@
 "use client"
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios'
+
 const Navbar = () => {
     const [token, setToken] = useState(null);
 
+    const getToken = async () => {
+        const res = await axios.get("/api/getToken")
+        setToken(res.data.token)
+    }
     useEffect(() => {
-        if (typeof window !== "undefined") {
-            const storedToken = localStorage.getItem("token");
-            setToken(storedToken);
-        }
+        getToken();
     }, []);
     const router = useRouter();
     return (
@@ -27,11 +30,9 @@ const Navbar = () => {
                     {token ? (
                         <button
                             className="inline-flex items-center px-3 py-1 mt-4 text-base text-black bg-blue-400 border-0 rounded focus:outline-none hover:bg-gray-200 md:mt-0"
-                            onClick={() => {
-                                // Remove the token from localStorage or perform logout logic
-                                localStorage.removeItem("token");
-                                localStorage.removeItem("id");
-                                // Redirect to the login page or perform other actions
+                            onClick={async () => {
+                                await axios.get("/api/logout")
+                                console.log("Logout successful")
                                 router.push("/login");
                             }}
                         >
