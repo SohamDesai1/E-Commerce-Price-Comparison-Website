@@ -17,9 +17,14 @@ const Product = new mongoose.Schema({
         type: Number,
         required: true,
     },
+    a_price_change: {
+        type: Array,
+    },
+    f_price_change: {
+        type: Array,
+    },
     image: {
         type: String,
-        required: true
     },
     createdAt: {
         type: Date,
