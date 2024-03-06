@@ -1,7 +1,9 @@
 "use client"
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 import axios from 'axios';
-import Compare from '@/components/Compare';
+import Compare from '@/app/components/Compare';
 
 const Comparison = () => {
     const [inputData, setInputData] = useState("");
@@ -15,7 +17,51 @@ const Comparison = () => {
     const [image_flip, setImageFlip] = useState("");
     const [rating_flip, setRatingFlip] = useState("");
     const [reviews_flip, setReviewsFlip] = useState("");
+    const [product, setProduct] = useState({
+        name: '',
+        a_price: 0,
+        f_price: 0,
+        image: '',
+        updatedAt: Date(),
+    });
 
+    const test = () => {
+        toast.success('Added to favourites!', {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+            transition: Bounce,
+        });
+    }
+    const addToFavorites = async (e) => {
+        e.preventDefault();
+        // convert price to number
+
+        try {
+            const res = await axios.post('/api/favourites', { product });
+            console.log(product.name, "Added to favourites");
+            if (res.status === 200) {
+                toast.success('Added to favourites!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                    theme: "dark",
+                    transition: Bounce,
+                });
+            }
+        } catch (error) {
+            console.error('Error adding to favourites:', error);
+        }
+    };
     const handleSubmit = async (e) => {
         e.preventDefault();
         setNameAmzn("")
@@ -43,13 +89,11 @@ const Comparison = () => {
             setImageFlip(response_f.data.image);
             setRatingFlip(response_f.data.rating);
             setReviewsFlip(response_f.data.reviews);
+            setProduct({ name: (response_a.data.name).toString(), a_price: parseInt(response_a.data.price.replace(/,/g, '')), f_price: parseInt(response_f.data.price.replace(/,/g, '')), image: response_f.data.image, updatedAt: Date() })
 
         } catch (error) {
             console.error("Error processing Amazon data:", error);
         }
-
-
-
 
     }
     return (
@@ -68,8 +112,13 @@ const Comparison = () => {
                     <button type="submit">Find</button>
                 </form>
                 <div className=''>
-                    {name_amzn && price_amzn && <Compare name_amzn={name_amzn} price_amzn={price_amzn} image_amzn={image_amzn} rating_amzn={rating_amzn} name_flip={name_flip} price_flip={price_flip} image_flip={image_flip} rating_flip={rating_flip} reviews_amzn={reviews_amzn} reviews_flip={reviews_flip} />}
+                    {name_amzn && price_amzn && name_flip && price_flip && <>
+                        <Compare name_amzn={name_amzn} price_amzn={price_amzn} image_amzn={image_amzn} rating_amzn={rating_amzn} name_flip={name_flip} price_flip={price_flip} image_flip={image_flip} rating_flip={rating_flip} reviews_amzn={reviews_amzn} reviews_flip={reviews_flip} /> <center> <button type="button" onClick={addToFavorites} className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to Favourites</button></center>
+                        <ToastContainer />
+                    </>}
+
                 </div>
+
             </div>
 
         </>

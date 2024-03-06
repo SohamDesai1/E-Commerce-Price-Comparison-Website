@@ -1,9 +1,12 @@
 from helper import scrap_amazon, scrap_flipkart
 from flask import Flask, request,jsonify
 from flask_cors import CORS
+from flask_apscheduler import APScheduler
+
 
 
 app = Flask(__name__)
+scheduler = APScheduler()
 CORS(app)
 
 
@@ -26,4 +29,6 @@ def compare():
     return data
 
 if __name__ == "__main__":
+    scheduler.init_app(app)
+    scheduler.start()
     app.run(debug=True)
