@@ -13,7 +13,7 @@ const Navbar = () => {
     }
     useEffect(() => {
         getToken();
-    }, []);
+    }, [token]);
     const router = useRouter();
     return (
         <>
