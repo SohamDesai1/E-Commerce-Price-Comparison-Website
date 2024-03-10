@@ -4,3 +4,6 @@ flask_cors
 requests
 json
 selenium
+email
+ssl
+smtp

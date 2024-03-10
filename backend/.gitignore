@@ -2,3 +2,4 @@ __pycache__
 venv
 scrapper.py
 .env
+demo.py
