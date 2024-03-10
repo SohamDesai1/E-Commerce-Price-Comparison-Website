@@ -1,8 +1,15 @@
+from dotenv import load_dotenv
 from flask import jsonify
 import requests
 import random
 from bs4 import BeautifulSoup
 from selenium_scrap import amazon_selenium_scrap, flipkart_selenium_scrap
+import ssl
+import smtplib
+import os
+from email.mime.text import MIMEText
+
+load_dotenv()
 
 def price_amazon(name):
     user_agents = [
@@ -60,4 +67,32 @@ def price_flipkart(name):
     except:
         data = flipkart_selenium_scrap(name)
         return data.price
+
+def sendMail(user_email, product_title, product_price, product_link):
+    try:
+        port = 465  # For SSL
+        smtp_server = "smtp.gmail.com"
+        sender_email = os.getenv("SENDER_EMAIL_ID")
+        receiver_email = user_email
+        password = os.getenv("SENDER_EMAIL_PASSWORD")
+        FROM = "Trackky"
+        SUBJECT = "ALERT!! Price Drop for your Product"
+
+        with open("email.txt", "r") as file:
+            TEXT = file.read()
+        TEXT = TEXT.format(product_title=product_title,
+                           product_price=product_price,
+                           product_link=product_link)
+        message = MIMEText(TEXT, 'html', 'utf-8')
+        message['From'] = FROM
+        message['Subject'] = SUBJECT
+
+        context = ssl.create_default_context()
+        with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+            server.login(sender_email, password)
+            server.sendmail(sender_email, receiver_email, message.as_string())
+            print("Email sent")
+            
+    except Exception as e:
+        print(e)
         
