@@ -76,14 +76,14 @@ const Comparison = () => {
         setReviewsFlip("")
 
         try {
-            const response_a = await axios.post('/api/compare?site=amazon', { inputData });
+            const response_a = await axios.post('/api/input/compare?site=amazon', { inputData });
             setNameAmzn(response_a.data.name);
             setPriceAmzn(response_a.data.price);
             setImageAmzn(response_a.data.image);
             setRatingAmzn(response_a.data.rating);
             setReviewsAmzn(response_a.data.reviews);
 
-            const response_f = await axios.post('/api/compare?site=flipkart', { inputData });
+            const response_f = await axios.post('/api/input/compare?site=flipkart', { inputData });
             setNameFlip(response_f.data.name);
             setPriceFlip(response_f.data.price);
             setImageFlip(response_f.data.image);
