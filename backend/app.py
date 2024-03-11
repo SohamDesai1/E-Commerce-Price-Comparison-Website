@@ -15,7 +15,7 @@ def main():
     return {"message": 'Hello World'}
 
 
-@app.route('/api/input/compare', methods=['POST'])
+@app.route('/api/compare', methods=['POST'])
 def compare():
     name = request.json.get('inputData', "")
     site = request.args.get('site', '')
