@@ -2,8 +2,7 @@ beautifulsoup4
 flask
 flask_cors
 requests
-json
 selenium
 email
-ssl
-smtp
+gunicorn
+Flask-APScheduler
