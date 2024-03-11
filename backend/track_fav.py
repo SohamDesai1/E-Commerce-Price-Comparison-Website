@@ -1,6 +1,6 @@
 from listener import price_amazon,price_flipkart
 from db import config
-import time
+from apscheduler.schedulers.blocking import BlockingScheduler
 
 myclient = config()
 mydb = myclient["Major_Project"]
@@ -24,11 +24,12 @@ def update_price():
             new_f_price = int(new_f_price)
 
         if new_a_price != a_price:
-            mycol.update_one({"name": name}, {"$set": {"a_price": new_a_price}},upsert=True)
-            mycol.update_one({"name": name}, {"$set": {"a_time": time.time()}},upsert=True)
-            mycol.update_one({"name": name},{"$push":{'a_price_change': new_a_price}},upsert=True)
-            
+            mycol.update_one({"name": name}, {"$set": {"a_price": new_a_price}})
+            mycol.update_one({"name": name},{"$push":{'a_price_change': new_a_price}})
         if new_f_price != f_price:
-            mycol.update_one({"name": name}, {"$set": {"f_price": new_f_price}},upsert=True)
-            mycol.update_one({"name": name}, {"$set": {"f_time": time.time()}},upsert=True)
-            mycol.update_one({"name": name},{"$push":{'f_price_change': new_f_price}},upsert=True)
+            mycol.update_one({"name": name}, {"$set": {"f_price": new_f_price}})
+            mycol.update_one({"name": name},{"$push":{'f_price_change': new_f_price}})
+
+scheduler = BlockingScheduler()
+scheduler.add_job(update_price, 'cron', hour=10)
+scheduler.start()
