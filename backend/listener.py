@@ -30,8 +30,11 @@ def price_amazon(name):
         return price_a
     
     except:
-        data = amazon_selenium_scrap(name)
-        return data.price
+        try:
+            data = amazon_selenium_scrap(name)
+            return data
+        except:
+            return jsonify({"name": "not found", "price": "not found", "image": "not found", "rating": "not found", "reviews": "not found"})
     
 
 def price_flipkart(name):
@@ -58,6 +61,9 @@ def price_flipkart(name):
         return price_f
     
     except:
-        data = flipkart_selenium_scrap(name)
-        return data.price
+        try:
+            data = flipkart_selenium_scrap(name)
+            return data
+        except:
+            return jsonify({"name": "not found", "price": "not found", "image": "not found", "rating": "not found", "reviews": "not found"})
         
