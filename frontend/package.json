@@ -24,6 +24,7 @@
     "next-client-cookies": "^1.1.0",
     "react": "latest",
     "react-chartjs-2": "^5.2.0",
+    "react-custom-rating-component": "^0.1.6",
     "react-dom": "latest",
     "react-toastify": "^10.0.4",
     "tailwindcss-debug-screens": "^2.2.1"
