@@ -14,42 +14,32 @@ const Navbar = () => {
     useEffect(() => {
         getToken();
     }, [token]);
+
     const router = useRouter();
     return (
-        <>
-            <header className="text-gray-600 bg-black body-font">
-                <div className="container flex flex-col flex-wrap items-center p-5 mx-auto md:flex-row">
-                    <a className="flex items-center mb-4 font-medium text-gray-900 title-font md:mb-0">
-                        <span className="ml-3 text-xl text-white">Web Scrapper</span>
-                    </a>
-                    <nav className="flex flex-wrap items-center justify-center text-base md:ml-auto">
-                        <Link href={"/"}><h1 className="mr-5 text-white hover:text-gray-300">Home</h1></Link>
-                        <Link href={'/comparison'}><h1 className="mr-5 text-white hover:text-gray-300">Compare </h1></Link>
-                        <Link href={'/favourites'}><h1 className="mr-5 text-white hover:text-gray-300">Favourites </h1></Link>
-                    </nav>
-                    {token ? (
-                        <button
-                            className="inline-flex items-center px-3 py-1 mt-4 text-base text-black bg-blue-400 border-0 rounded focus:outline-none hover:bg-gray-200 md:mt-0"
-                            onClick={async () => {
-                                await axios.get("/api/logout")
-                                console.log("Logout successful")
-                                router.push("/login");
-                            }}
-                        >
-                            Log out
-                        </button>
-                    ) : (
-                        <Link href={"/login"}>
-                            <button className="inline-flex items-center px-3 py-1 mt-4 text-base text-black bg-blue-400 border-0 rounded focus:outline-none hover:bg-gray-200 md:mt-0">
-                                Log in
-                            </button>
-                        </Link>
-                    )}
+        <div className="flex justify-between gap-5 px-20 text-xl text-white bg-gray-900 rounded-none shadow-lg py-7 max-md:flex-wrap max-md:px-5">
+            <div className="flex-auto my-auto italic font-bold">Trackky</div>
+            <div className="flex justify-between gap-5 font-medium whitespace-nowrap max-md:flex-wrap max-md:max-w-full">
+                <div className="flex justify-between flex-auto gap-5 my-auto">
+                    <Link href={'/'}>Home</Link>
+                    <Link href={'/comparison'}>Compare</Link>
+                    {token ?<Link className="flex-auto" href={'/favourites'} >Favourites</Link> : <div></div>}
                 </div>
-            </header>
-
-        </>
-    )
+                {token ?
+                    <button className="justify-center px-4 py-3 border-2 border-solid rounded-2xl border-sky-300" onClick={async () => {
+                        await axios.get("/api/logout")
+                        console.log("Logout successful")
+                        router.push("/login");
+                    }}>
+                        Log out
+                    </button>
+                    : <button onClick={router.push('/login')} className="justify-center px-4 py-3 border-2 border-solid rounded-2xl border-sky-300">
+                        Log in
+                    </button>
+                }
+            </div>
+        </div>
+    );
 }
 
 export default Navbar
