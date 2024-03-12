@@ -2,5 +2,7 @@ beautifulsoup4
 flask
 flask_cors
 requests
-json
 selenium
+gunicorn
+Flask-APScheduler
+pymongo
