@@ -1,6 +1,7 @@
 from bson import ObjectId
 from listener import price_amazon,price_flipkart, sendMail
 from db import config
+import time
 from apscheduler.schedulers.blocking import BlockingScheduler
 
 myclient = config()
@@ -34,13 +35,15 @@ def update_price():
 
 
         if new_a_price != a_price:
-            mycol.update_one({"name": name}, {"$set": {"a_price": new_a_price}})
-            mycol.update_one({"name": name},{"$push":{'a_price_change': new_a_price}})
+            mycol.update_one({"name": name}, {"$set": {"a_price": new_a_price}},upsert=True)
+            mycol.update_one({"name": name}, {"$set": {"a_time": time.time()}},upsert=True)
+            mycol.update_one({"name": name},{"$push":{'a_price_change': new_a_price}},upsert=True)
             
         if new_f_price != f_price:
-            mycol.update_one({"name": name}, {"$set": {"f_price": new_f_price}})
-            mycol.update_one({"name": name},{"$push":{'f_price_change': new_f_price}})
-        
+            mycol.update_one({"name": name}, {"$set": {"f_price": new_f_price}},upsert=True)
+            mycol.update_one({"name": name}, {"$set": {"f_time": time.time()}},upsert=True)
+            mycol.update_one({"name": name},{"$push":{'f_price_change': new_f_price}},upsert=True)
+            
         if new_a_price < a_price and (a_price != -1):
             if user_id:
                 user = mydb.users.find_one({"_id": ObjectId(user_id), "email": {"$exists": True}})

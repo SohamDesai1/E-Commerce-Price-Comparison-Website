@@ -6,3 +6,4 @@ selenium
 email
 gunicorn
 Flask-APScheduler
+pymongo
