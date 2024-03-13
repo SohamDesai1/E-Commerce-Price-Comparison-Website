@@ -7,6 +7,8 @@ import axios from 'axios'
 const Navbar = () => {
     const [token, setToken] = useState(null);
 
+    const router = useRouter();
+
     const getToken = async () => {
         const res = await axios.get("/api/getToken")
         setToken(res.data.token)
@@ -15,7 +17,15 @@ const Navbar = () => {
         getToken();
     }, [token]);
 
-    const router = useRouter();
+    const logout = async () => {
+        await axios.get("/api/logout")
+        console.log("Logout successful")
+        router.push("/");
+    }
+
+    const login = () => {
+        router.push('/login')
+    }
     return (
         <div className="flex justify-between gap-5 px-20 text-xl text-white bg-gray-900 rounded-none shadow-lg py-7 max-md:flex-wrap max-md:px-5">
             <div className="flex-auto my-auto italic font-bold">Trackky</div>
@@ -23,17 +33,13 @@ const Navbar = () => {
                 <div className="flex justify-between flex-auto gap-5 my-auto">
                     <Link href={'/'}>Home</Link>
                     <Link href={'/comparison'}>Compare</Link>
-                    {token ?<Link className="flex-auto" href={'/favourites'} >Favourites</Link> : <div></div>}
+                    {token ? <Link className="flex-auto" href={'/favourites'} >Favourites</Link> : <div></div>}
                 </div>
                 {token ?
-                    <button className="justify-center px-4 py-3 border-2 border-solid rounded-2xl border-sky-300" onClick={async () => {
-                        await axios.get("/api/logout")
-                        console.log("Logout successful")
-                        router.push("/login");
-                    }}>
+                    <button className="justify-center px-4 py-3 border-2 border-solid rounded-2xl border-sky-300" onClick={logout}>
                         Log out
                     </button>
-                    : <button onClick={router.push('/login')} className="justify-center px-4 py-3 border-2 border-solid rounded-2xl border-sky-300">
+                    : <button onClick={login} className="justify-center px-4 py-3 border-2 border-solid rounded-2xl border-sky-300">
                         Log in
                     </button>
                 }
