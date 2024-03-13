@@ -1,7 +1,7 @@
 from bson import ObjectId
 from listener import price_amazon,price_flipkart, sendMail
 from db import config
-from apscheduler.schedulers.blocking import BlockingScheduler
+
 
 myclient = config()
 mydb = myclient["Major_Project"]
@@ -53,8 +53,3 @@ def update_price():
                 if user:
                     email = user["email"]
                     sendMail(email,name, new_f_price,f_link)
-
-
-scheduler = BlockingScheduler()
-scheduler.add_job(update_price, 'cron', hour=10)
-scheduler.start()

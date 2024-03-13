@@ -3,7 +3,7 @@ flask
 flask_cors
 requests
 selenium
-email
 gunicorn
 Flask-APScheduler
 pymongo
+python-dotenv
