@@ -1,7 +1,7 @@
 from bson import ObjectId
 from listener import price_amazon,price_flipkart, sendMail
 from db import config
-
+import time
 
 myclient = config()
 mydb = myclient["Major_Project"]
@@ -34,22 +34,11 @@ def update_price():
 
 
         if new_a_price != a_price:
-            mycol.update_one({"name": name}, {"$set": {"a_price": new_a_price}})
-            mycol.update_one({"name": name},{"$push":{'a_price_change': new_a_price}})
+            mycol.update_one({"name": name}, {"$set": {"a_price": new_a_price}},upsert=True)
+            mycol.update_one({"name": name}, {"$set": {"a_time": time.time()}},upsert=True)
+            mycol.update_one({"name": name},{"$push":{'a_price_change': new_a_price}},upsert=True)
             
         if new_f_price != f_price:
-            mycol.update_one({"name": name}, {"$set": {"f_price": new_f_price}})
-            mycol.update_one({"name": name},{"$push":{'f_price_change': new_f_price}})
-        
-        if new_a_price < a_price and (a_price != -1):
-            if user_id:
-                user = mydb.users.find_one({"_id": ObjectId(user_id), "email": {"$exists": True}})
-                if user:
-                    email = user["email"]
-                    sendMail(email,name, new_a_price,a_link)
-        if new_f_price < f_price and (f_price != -1):
-            if user_id:
-                user = mydb.users.find_one({"_id": ObjectId(user_id), "email": {"$exists": True}})
-                if user:
-                    email = user["email"]
-                    sendMail(email,name, new_f_price,f_link)
+            mycol.update_one({"name": name}, {"$set": {"f_price": new_f_price}},upsert=True)
+            mycol.update_one({"name": name}, {"$set": {"f_time": time.time()}},upsert=True)
+            mycol.update_one({"name": name},{"$push":{'f_price_change': new_f_price}},upsert=True)
