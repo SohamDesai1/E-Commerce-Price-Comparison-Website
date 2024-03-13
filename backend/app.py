@@ -1,3 +1,4 @@
+from track_fav import update_price
 from helper import scrap_amazon, scrap_flipkart
 from flask import Flask, request,jsonify
 from flask_cors import CORS
@@ -28,6 +29,12 @@ def compare():
 
     return data
 
+
+@scheduler.task("interval",days=1)
+def job():
+    update_price()
+    
+    
 if __name__ == "__main__":
     scheduler.init_app(app)
     scheduler.start()
