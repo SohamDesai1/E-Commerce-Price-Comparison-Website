@@ -1,13 +1,10 @@
 "use client"
 
-import Link from "next/link";
-import Compare from "./components/Compare";
-
 export default function Home() {
   return (
     <>
       <section className="text-white bg-gray-900">
-        <div className="max-w-screen-xl px-4 py-32 mx-auto lg:flex lg:h-[88.4vh] lg:items-center">
+        <div className="max-w-screen-xl px-4 py-32 mx-auto lg:flex lg:h-[88.6vh] lg:items-center">
           <img src="/bg.png" alt="" className="relative "/>
           <div className="absolute max-w-3xl mx-auto text-center top-[40%] left-[30%]">
             <h1 className="text-3xl font-extrabold text-transparent bg-gradient-to-r from-green-300 via-blue-500 to-purple-600 bg-clip-text sm:text-5xl">
@@ -31,8 +28,6 @@ export default function Home() {
         </div>
         {/* <Footer /> */}
       </section>
-      
-       {/* <Compare /> */}
     </>
   );
 }
