@@ -43,8 +43,11 @@ def scrap_amazon(name):
         return jsonify({"name": title_a, "price": price_a, "image": imagelink_a, "rating": rating_a, "reviews": reviews_a})
     
     except:
-        data = amazon_selenium_scrap(name)
-        return data
+        try:
+            data = amazon_selenium_scrap(name)
+            return data
+        except:
+            return jsonify({"name": "not found", "price": "not found", "image": "not found", "rating": "not found", "reviews": "not found"})
     
     
     
@@ -81,6 +84,9 @@ def scrap_flipkart(name):
         return jsonify({"name": title_f, "price": price_f, "image": imagelink_f, "rating": rating_f, "reviews": reviews_f})
     
     except:
-        data = flipkart_selenium_scrap(name)
-        return data
+        try:
+            data = flipkart_selenium_scrap(name)
+            return data
+        except:
+            return jsonify({"name": "not found", "price": "not found", "image": "not found", "rating": "not found", "reviews": "not found"})
         

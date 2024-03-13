@@ -26,6 +26,12 @@ const Product = new mongoose.Schema({
     image: {
         type: String,
     },
+    a_link:{
+        type: String,
+    },
+    f_link:{
+        type: String,
+    },
     createdAt: {
         type: Date,
         default: Date.now,

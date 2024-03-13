@@ -6,3 +6,4 @@ selenium
 gunicorn
 Flask-APScheduler
 pymongo
+python-dotenv
