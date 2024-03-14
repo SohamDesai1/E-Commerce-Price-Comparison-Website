@@ -27,46 +27,44 @@ const Login = () => {
         }
     }
     return (
-        <div className="flex">
-            <div className="flex justify-center items-center h-screen border lg:w-[85%] xxsm:w-[100%] bg-[#F7F8FF]">
-                <div className="flex flex-col gap-3 p-5">
-                    <div className="leading-10">
-                        <h1 className="font-semibold lg:text-3xl xxsm:text-2xl">Welcome back</h1>
-                        <h1 className="text-gray-400 lg:text-md">Please enter your email and password</h1>
+        <>
+            <div className="flex items-center justify-center px-16 py-20 bg-gradient-to-r from-[#010003] via-[#221C4C] to-[#002D2B] max-md:px-5 lg:flex lg:h-[88.6vh]">
+                <div className="flex flex-col py-1 mt-0 max-w-full border  rounded-[34px] w-[603px] max-md:mt-10">
+                    <br />
+                    <div className="self-start ml-12 text-6xl whitespace-nowrap max-md:ml-2.5 max-md:text-4xl text-white font-customfont">
+                        Log in
                     </div>
-                    <div className="flex gap-5 lg:flex-row xxsm:flex-col">
-                        <div>
-                            <input
-                                className="w-full p-3 border-2 border-gray-400 rounded-md"
-                                placeholder="Email"
-                                type="text"
-                                name="email"
-                                value={user.email}
-                                onChange={(e) => setUser({ ...user, email: e.target.value })}
-                            />
-                        </div>
-                        <div>
-                            <input
-                                className="w-full p-3 border-2 border-gray-400 rounded-md"
-                                placeholder="Password"
-                                type="password"
-                                name="password"
-                                value={user.password}
-                                onChange={(e) => setUser({ ...user, password: e.target.value })}
-                            />
-                        </div>
-                    </div>
-                    <div className="flex justify-end mt-3">
-                        <button className="py-3 font-semibold text-gray-400 bg-white border-2 border-gray-400 rounded-md px-7" onClick={onLogin}>
-                            Login
+                    <br />
+                    <div className="w-[602px] h-[0px] border border-white"></div>
+                    <div className="flex flex-col px-12 mt-8 text-3xl font-medium max-md:px-5 max-md:max-w-full">
+                        <div className="text-white max-md:max-w-full">Email</div>
+                        <input
+                            className="w-full p-3 border-2 border-gray-400 rounded-lg"
+
+                            type="email"
+                            name="email"
+                            value={user.email}
+                            onChange={(e) => setUser({ ...user, email: e.target.value })}
+                        />
+                        <div className="mt-8 text-white max-md:max-w-full">Password</div>
+                        <input
+                            className="w-full p-3 border-2 border-gray-400 rounded-lg"
+
+                            type="password"
+                            name="password"
+                            value={user.password}
+                            onChange={(e) => setUser({ ...user, password: e.target.value })}
+                        />
+                        <button className="flex items-center justify-center px-16 py-6 mt-12 text-3xl border border-black border-solid whitespace-nowrap bg-cyan-400 rounded-2xl max-md:px-5 max-md:mt-10 max-md:max-w-full" onClick={onLogin}>
+                            Log in
                         </button>
-                        <Link href={"/signup"}><button className="py-3 font-semibold text-gray-400 bg-white border-2 border-gray-400 rounded-md px-7" >
-                            Signup
-                        </button></Link>
+                        <div className="self-center text-xl underline mt-9 whitespace-nowrap">
+                            <Link href={"/signup"}> <span className="text-white underline">Don’t have an account?</span> </Link>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     )
 }
 
