@@ -14,15 +14,24 @@ const CompCard = ({ name, image, price, rating, reviews, website }) => {
             <div className="mt-6 text-4xl font-bold whitespace-nowrap text-blue-950">
                 {name}
             </div>
+            <br />
+            <div className="w-[382px] h-[0px] border border-zinc-500"></div>
             <div className="mt-6 text-4xl font-bold text-blue-950">{website}</div>
-            <div className="mt-6 text-4xl font-bold text-blue-950">{price}</div>
-            <div className="mt-6 text-4xl font-bold text-blue-950">{reviews} reviews</div>
+            <br />
+            <div className="w-[382px] h-[0px] border border-zinc-500"></div>
+            <div className="mt-6 text-4xl font-bold text-blue-950">Rs.{price}</div>
+            <br />
+            <div className="w-[382px] h-[0px] border border-zinc-500"></div>
+            <br />
             <Rating
                 defaultValue={rating}
                 size='30px'
                 spacing='10px'
                 activeColor='yellow'
+                readOnly
             />
+            <div className="mt-6 text-4xl font-bold text-blue-950">{reviews} reviews</div>
+
         </div>
     )
 }
