@@ -11,7 +11,7 @@ const CompCard = ({ name, image, price, rating, reviews, website }) => {
                 srcSet="..."
                 className="max-w-full shadow-sm aspect-[0.79] w-[262px]"
             />
-            <div className="mt-6 text-4xl font-bold whitespace-nowrap text-blue-950">
+            <div className="mt-6 text-2xl font-bold whitespace-nowrap text-blue-950">
                 {name}
             </div>
             <br />
