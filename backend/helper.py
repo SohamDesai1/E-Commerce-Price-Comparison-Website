@@ -68,8 +68,7 @@ def scrap_flipkart(name):
         url_f = "https://www.flipkart.com/search?q=" + str(
             name) + "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
         r_f = requests.get(url_f, headers=headers_f)
-        r_f = r_f.text
-        soup_f = BeautifulSoup(r_f, 'lxml')
+        soup_f = BeautifulSoup(r_f.content, 'lxml')
         title_f = soup_f.find('div', {'class': '_4rR01T'}).text
         price_f = soup_f.find('div', {'class': '_30jeq3 _1_WHN1'}
                           ).text.replace("₹", "")
