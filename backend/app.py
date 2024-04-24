@@ -1,3 +1,4 @@
+from selenium_scrap import amazon_selenium_scrap,flipkart_selenium_scrap
 from track_fav import update_price
 from helper import scrap_amazon, scrap_flipkart
 from flask import Flask, request,jsonify
@@ -21,9 +22,9 @@ def compare():
     name = request.json.get('inputData', "")
     site = request.args.get('site', '')
     if site == 'amazon':
-        data = scrap_amazon(name)
+        data = amazon_selenium_scrap(name)
     elif site == 'flipkart':
-        data = scrap_flipkart(name)
+        data = flipkart_selenium_scrap(name)
     else:
         return jsonify({"error": "Invalid site specified"})
 
