@@ -5,17 +5,19 @@ import { useState, useEffect } from 'react';
 import axios from 'axios'
 
 const Navbar = () => {
-    const [token, setToken] = useState(null);
+    const [token, setToken] = useState('');
 
     const router = useRouter();
 
-    const getToken = async () => {
-        const res = await axios.get("/api/getToken")
-        setToken(res.data.token)
-    }
     useEffect(() => {
+        const getToken = async () => {
+            const res = await axios.get("/api/getToken")
+            setToken(res.data.token)
+            console.log(res.data.token)
+        }
+        
         getToken();
-    }, [token]);
+    }, []);
 
     const logout = async () => {
         await axios.get("/api/logout")
