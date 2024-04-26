@@ -30,30 +30,27 @@ def amazon_selenium_scrap(name):
         rating_a = parts_a[0]
         reviews_a = soup_a.find(
             "span", {"class": "a-size-base s-underline-text"}).text
-        driver.quit()
         return jsonify({"name": title_a, "price": price_a, "image": imagelink_a, "rating": rating_a, "reviews": reviews_a})
     except:
         driver.quit()
         return jsonify({"name": "not found", "price": "not found", "image": "not found", "rating": "not found", "reviews": "not found"})
     
 def flipkart_selenium_scrap(name):
-    try:
+    
         driver.get("https://www.flipkart.com/search?q=" + str(
             name) + "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off")
         driver.implicitly_wait(2)
         soup_f = BeautifulSoup(driver.page_source, 'lxml')
-        title_f = soup_f.find('div', {'class': '_4rR01T'}).text
-        price_f = soup_f.find('div', {'class': '_30jeq3 _1_WHN1'}
+        title_f = soup_f.find('div', {'class': 'KzDlHZ'}).text
+        price_f = soup_f.find('div', {'class': 'Nx9bqj _4b5DiR'}
                           ).text.replace("₹", "")
-        print(price_f)
-        image_f = soup_f.find('img', attrs={'class': '_396cs4'})
+        # print(price_f)
+        image_f = soup_f.find('img', attrs={'class': 'DByuf4'})
         imagelink_f = image_f['src']
-        rating_f = soup_f.find('div', {'class': '_3LWZlK'}).text
-        reviews_f = soup_f.find('span', {'class': '_2_R_DZ'}).text
+        rating_f = soup_f.find('div', {'class': 'XQDdHH'}).text
+        reviews_f = soup_f.find('span', {'class': 'Wphh3N'}).text
         parts_f = reviews_f.split('&')
         reviews_part_f = parts_f[1]
         reviews_f = reviews_part_f.strip().split()[0]
         return jsonify({"name": title_f, "price": price_f, "image": imagelink_f, "rating": rating_f, "reviews": reviews_f})
-    except:
-        driver.quit()
-        return jsonify({"name": "not found", "price": "not found", "image": "not found", "rating": "not found", "reviews": "not found"})
+    

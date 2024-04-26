@@ -65,19 +65,19 @@ def scrap_flipkart(name):
         name) + "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off"
     r_f = requests.get(url_f, headers=headers_f)
     # print(r_f.content)
-    soup_f = BeautifulSoup(r_f.content, 'lxml')
-    title_f = soup_f.find('div', {'class': '_4rR01T'}).text
-    price_f = soup_f.find('div', {'class': '_30jeq3 _1_WHN1'}
+    soup_f = BeautifulSoup(r_f.content, 'html.parser')
+    title_f = soup_f.find('div', {'class': 'KzDlHZ'}).text
+    price_f = soup_f.find('div', {'class': 'Nx9bqj _4b5DiR'}
                       ).text.replace("₹", "")
     # print(price_f)
-    image_f = soup_f.find('img', attrs={'class': '_396cs4'})
+    image_f = soup_f.find('img', attrs={'class': 'DByuf4'})
     imagelink_f = image_f['src']
-    rating_f = soup_f.find('div', {'class': '_3LWZlK'}).text
-    reviews_f = soup_f.find('span', {'class': '_2_R_DZ'}).text
+    rating_f = soup_f.find('div', {'class': 'XQDdHH'}).text
+    reviews_f = soup_f.find('span', {'class': 'Wphh3N'}).text
     parts_f = reviews_f.split('&')
     reviews_part_f = parts_f[1]
     reviews_f = reviews_part_f.strip().split()[0]
-    if title_f != None:
+    if title_f == str:
         return jsonify({"name": title_f, "price": price_f, "image": imagelink_f, "rating": rating_f, "reviews": reviews_f})
     else:
         data = flipkart_selenium_scrap(name)
