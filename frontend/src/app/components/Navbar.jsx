@@ -29,7 +29,7 @@ const Navbar = () => {
         router.push('/login')
     }
     return (
-        <div className="flex justify-between gap-5 px-20 text-xl text-white bg-gray-900 rounded-none shadow-lg py-7 max-md:flex-wrap max-md:px-5">
+        <div className="flex justify-between gap-5 px-20 text-xl text-white bg-gray-900 rounded-none shadow-xl shadow-white py-7 max-md:flex-wrap max-md:px-5">
             <div className="flex-auto my-auto italic font-bold">Trackky</div>
             <div className="flex justify-between gap-5 font-medium whitespace-nowrap max-md:flex-wrap max-md:max-w-full">
                 <div className="flex justify-between flex-auto gap-5 my-auto">

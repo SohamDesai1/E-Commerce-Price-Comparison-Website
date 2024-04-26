@@ -12,7 +12,7 @@ function truncateString(str, maxLength) {
 const CompCard = ({ name, image, price, rating, reviews, website }) => {
     // console.log(image);
     return (
-        <div className="flex flex-col items-center px-11 py-14 bg-white border-yellow-400 border-solid shadow-lg border-[7px] max-w-[467px] rounded-[33px]">
+        <div className={"flex flex-col items-center px-11 py-14 bg-white border-yellow-400 border-solid shadow-lg shadow-yellow-400 border-[7px] max-w-[467px] rounded-[33px]"}>
             {
                 image && <img
                 src={image}
