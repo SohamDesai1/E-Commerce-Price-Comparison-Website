@@ -1,5 +1,7 @@
 "use client"
 
+import Link from "next/link";
+
 export default function Home() {
   return (
     <>
@@ -17,12 +19,12 @@ export default function Home() {
               Through the power of Web Scrapping we bring you the one stop tool for your next E-Commerce purchase.
             </p>
             <div className="flex flex-wrap justify-center gap-4 mt-8">
-              <div className="justify-center px-10 py-5 text-2xl text-center text-gray-900 whitespace-nowrap bg-cyan-400 rounded-[36px]">
+              <Link href={'/comparison'}><div className="justify-center px-10 py-5 text-2xl text-center text-gray-900 whitespace-nowrap bg-cyan-400 rounded-[36px]">
                 Get Started
-              </div>
-              <div className="justify-center px-10 py-5 text-2xl text-center text-cyan-400 whitespace-nowrap border border-cyan-400 border-solid rounded-[36px]">
+              </div></Link>
+              <Link href={'/about'}><div className="justify-center px-10 py-5 text-2xl text-center text-cyan-400 whitespace-nowrap border border-cyan-400 border-solid rounded-[36px]">
                 Learn more
-              </div>
+              </div></Link>
             </div>
           </div>
         </div>

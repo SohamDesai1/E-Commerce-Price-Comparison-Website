@@ -24,27 +24,27 @@ def scrap_amazon(name):
     recieve_a = requests.get(url_a, headers=headers_a)
     # print(recieve.content)
     soup = BeautifulSoup(recieve_a.content, 'html.parser')
-    try:
-        title_a = soup.find(
-            "span", {"class": "a-size-medium a-color-base a-text-normal"}).text
-        parent_price_a = soup.find(
-            'div', class_='a-row a-size-base a-color-base')
-        price_a = parent_price_a.find('span', class_='a-price-whole').text
-        # print("Amazon:", price_a)
-        image_a = soup.find('img', attrs={'class': 's-image'})
-        imagelink_a = image_a['src']
-        # print(imagelink_a)
-        rating_text_a = soup.find('span', attrs={
-                                'class': 'a-icon-alt'}).text
-        parts_a = rating_text_a.split(" out of ")
-        rating_a = parts_a[0]
-        reviews_a = soup.find(
-            "span", {"class": "a-size-base s-underline-text"}).text
-        return jsonify({"name": title_a, "price": price_a, "image": imagelink_a, "rating": rating_a, "reviews": reviews_a})
+    # try:
+    title_a = soup.find(
+        "span", {"class": "a-size-medium a-color-base a-text-normal"}).text
+    parent_price_a = soup.find(
+        'div', class_='a-row a-size-base a-color-base')
+    price_a = parent_price_a.find('span', class_='a-price-whole').text
+    # print("Amazon:", price_a)
+    image_a = soup.find('img', attrs={'class': 's-image'})
+    imagelink_a = image_a['src']
+    # print(imagelink_a)
+    rating_text_a = soup.find('span', attrs={
+                            'class': 'a-icon-alt'}).text
+    parts_a = rating_text_a.split(" out of ")
+    rating_a = parts_a[0]
+    reviews_a = soup.find(
+        "span", {"class": "a-size-base s-underline-text"}).text
+    return jsonify({"name": title_a, "price": price_a, "image": imagelink_a, "rating": rating_a, "reviews": reviews_a})
     
-    except:
-        data = amazon_selenium_scrap(name)
-        return data
+    # except:
+    #     data = amazon_selenium_scrap(name)
+    #     return data
     
     
     

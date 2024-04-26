@@ -52,7 +52,7 @@ const MyChart = () => {
             },
         }
     };
-    const labels = ['August', 'September', 'October', 'November', 'December', 'January', 'Febuary', 'March'];
+    const labels = ['July','August','August', 'September', 'October','October', 'November', 'December', 'January', 'Febuary', 'March',"April"];
 
     const data_a = {
         labels,

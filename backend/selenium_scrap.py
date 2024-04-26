@@ -10,11 +10,11 @@ chrome_options.add_argument('--disable-dev-shm-usage')
 driver = webdriver.Chrome(options=chrome_options)
 
 def amazon_selenium_scrap(name):
-    try:
         driver.get("https://www.amazon.in/s?k=" + \
                 str(name) + "&ref=nb_sb_noss_2")
         driver.implicitly_wait(2)
         soup_a = BeautifulSoup(driver.page_source, 'html.parser')
+        print(driver.page_source)
         title_a = soup_a.find(
             "span", {"class": "a-size-medium a-color-base a-text-normal"}).text
         parent_price_a = soup_a.find(
@@ -31,12 +31,9 @@ def amazon_selenium_scrap(name):
         reviews_a = soup_a.find(
             "span", {"class": "a-size-base s-underline-text"}).text
         return jsonify({"name": title_a, "price": price_a, "image": imagelink_a, "rating": rating_a, "reviews": reviews_a})
-    except:
-        driver.quit()
-        return jsonify({"name": "not found", "price": "not found", "image": "not found", "rating": "not found", "reviews": "not found"})
+
     
 def flipkart_selenium_scrap(name):
-    
         driver.get("https://www.flipkart.com/search?q=" + str(
             name) + "&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off")
         driver.implicitly_wait(2)
