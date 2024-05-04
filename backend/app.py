@@ -1,4 +1,4 @@
-from selenium_scrap import amazon_selenium_scrap,flipkart_selenium_scrap
+from selenium_scrap import amazon_selenium_scrap, flipkart_selenium_scrap
 from track_fav import update_price
 from helper import scrap_amazon, scrap_flipkart
 from flask import Flask, request,jsonify

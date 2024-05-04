@@ -24,27 +24,27 @@ def scrap_amazon(name):
     recieve_a = requests.get(url_a, headers=headers_a)
     # print(recieve.content)
     soup = BeautifulSoup(recieve_a.content, 'html.parser')
-    try:
-        title_a = soup.find(
-            "span", {"class": "a-size-medium a-color-base a-text-normal"}).text
-        parent_price_a = soup.find(
-            'div', class_='a-row a-size-base a-color-base')
-        price_a = parent_price_a.find('span', class_='a-price-whole').text
-        # print("Amazon:", price_a)
-        image_a = soup.find('img', attrs={'class': 's-image'})
-        imagelink_a = image_a['src']
-        # print(imagelink_a)
-        rating_text_a = soup.find('span', attrs={
-                                'class': 'a-icon-alt'}).text
-        parts_a = rating_text_a.split(" out of ")
-        rating_a = parts_a[0]
-        reviews_a = soup.find(
-            "span", {"class": "a-size-base s-underline-text"}).text
-        return jsonify({"name": title_a, "price": price_a, "image": imagelink_a, "rating": rating_a, "reviews": reviews_a})
+    # try:
+    title_a = soup.find(
+        "span", {"class": "a-size-medium a-color-base a-text-normal"}).text
+    parent_price_a = soup.find(
+        'div', class_='a-row a-size-base a-color-base')
+    price_a = parent_price_a.find('span', class_='a-price-whole').text
+    # print("Amazon:", price_a)
+    image_a = soup.find('img', attrs={'class': 's-image'})
+    imagelink_a = image_a['src']
+    # print(imagelink_a)
+    rating_text_a = soup.find('span', attrs={
+                            'class': 'a-icon-alt'}).text
+    parts_a = rating_text_a.split(" out of ")
+    rating_a = parts_a[0]
+    reviews_a = soup.find(
+        "span", {"class": "a-size-base s-underline-text"}).text
+    return jsonify({"name": title_a, "price": price_a, "image": imagelink_a, "rating": rating_a, "reviews": reviews_a})
     
-    except:
-        data = amazon_selenium_scrap(name)
-        return data
+    # except:
+    #     data = amazon_selenium_scrap(name)
+    #     return data
     
     
     
@@ -66,15 +66,19 @@ def scrap_flipkart(name):
     r_f = requests.get(url_f, headers=headers_f)
     # print(r_f.content)
     soup_f = BeautifulSoup(r_f.content, 'html.parser')
-    title_f = soup_f.find('div', {'class': '_4rR01T'}).text
-    price_f = soup_f.find('div', {'class': '_30jeq3 _1_WHN1'}
+    title_f = soup_f.find('div', {'class': 'KzDlHZ'}).text
+    price_f = soup_f.find('div', {'class': 'Nx9bqj _4b5DiR'}
                       ).text.replace("₹", "")
     # print(price_f)
-    image_f = soup_f.find('img', attrs={'class': '_396cs4'})
+    image_f = soup_f.find('img', attrs={'class': 'DByuf4'})
     imagelink_f = image_f['src']
-    rating_f = soup_f.find('div', {'class': '_3LWZlK'}).text
-    reviews_f = soup_f.find('span', {'class': '_2_R_DZ'}).text
+    rating_f = soup_f.find('div', {'class': 'XQDdHH'}).text
+    reviews_f = soup_f.find('span', {'class': 'Wphh3N'}).text
     parts_f = reviews_f.split('&')
     reviews_part_f = parts_f[1]
     reviews_f = reviews_part_f.strip().split()[0]
-    return jsonify({"name": title_f, "price": price_f, "image": imagelink_f, "rating": rating_f, "reviews": reviews_f})
+    if title_f == str:
+        return jsonify({"name": title_f, "price": price_f, "image": imagelink_f, "rating": rating_f, "reviews": reviews_f})
+    else:
+        data = flipkart_selenium_scrap(name)
+        return data       
