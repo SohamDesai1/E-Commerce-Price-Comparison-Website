@@ -14,7 +14,7 @@ def amazon_selenium_scrap(name):
                 str(name) + "&ref=nb_sb_noss_2")
         driver.implicitly_wait(2)
         soup_a = BeautifulSoup(driver.page_source, 'html.parser')
-        print(driver.page_source)
+        # print(driver.page_source)
         title_a = soup_a.find(
             "span", {"class": "a-size-medium a-color-base a-text-normal"}).text
         parent_price_a = soup_a.find(
