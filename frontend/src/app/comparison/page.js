@@ -18,6 +18,7 @@ const Comparison = () => {
     const [image_flip, setImageFlip] = useState("");
     const [rating_flip, setRatingFlip] = useState("");
     const [reviews_flip, setReviewsFlip] = useState("");
+    const [Fav, setFav] = useState(false)
     const [product, setProduct] = useState({
         name: '',
         a_price: 0,
@@ -45,6 +46,10 @@ const Comparison = () => {
 
         try {
             const res = await axios.post('/api/favourites', { product });
+            const data = res.data;
+            if (data.isFav) {
+                setFav(true)
+            }
             console.log(product.name, "Added to favourites");
             if (res.status === 200) {
                 toast.success('Added to favourites!', {
@@ -151,7 +156,9 @@ const Comparison = () => {
                 </form>
 
                 {name_amzn && price_amzn && name_flip && price_flip && <>
-                    <Compare name_amzn={name_amzn} price_amzn={price_amzn} image_amzn={image_amzn} rating_amzn={rating_amzn} name_flip={name_flip} price_flip={price_flip} image_flip={image_flip} rating_flip={rating_flip} reviews_amzn={reviews_amzn} reviews_flip={reviews_flip} /> <center> <button type="button" onClick={addToFavorites} className="text-white bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Add to Favourites</button></center>
+                    <Compare name_amzn={name_amzn} price_amzn={price_amzn} image_amzn={image_amzn} rating_amzn={rating_amzn} name_flip={name_flip} price_flip={price_flip} image_flip={image_flip} rating_flip={rating_flip} reviews_amzn={reviews_amzn} reviews_flip={reviews_flip} /> <center>
+
+                        {Fav ? <button type="button" onClick={addToFavorites} className="text-white bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Add to Favourites</button> : <button type="button" onClick={addToFavorites} className="text-white bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 ">Remove to Favourites</button>}</center>
                     <ToastContainer />
                 </>}
 
